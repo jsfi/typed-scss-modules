@@ -5,6 +5,10 @@ jest.mock("../../lib/prettier/can-resolve", () => ({
   canResolvePrettier: () => false,
 }));
 
+export const setLineEndings = (text: string, EOL = os.EOL) => {
+  return EOL === "\n" ? text : text.replace(/\n/g, os.EOL);
+};
+
 describe("classNamesToTypeDefinitions (without Prettier)", () => {
   beforeEach(() => {
     console.log = jest.fn();
@@ -19,7 +23,9 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       });
 
       expect(definition).toEqual(
-        "export const myClass: string;\nexport const yourClass: string;\n"
+        setLineEndings(
+          "export const myClass: string;\nexport const yourClass: string;\n"
+        )
       );
     });
 
@@ -40,7 +46,9 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         exportType: "named",
       });
 
-      expect(definition).toEqual("export const myClass: string;\n");
+      expect(definition).toEqual(
+        setLineEndings("export const myClass: string;\n")
+      );
       expect(console.log).toBeCalledWith(
         expect.stringContaining(`[SKIPPING] 'if' is a reserved keyword`)
       );
@@ -53,7 +61,9 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
         exportType: "named",
       });
 
-      expect(definition).toEqual("export const myClass: string;\n");
+      expect(definition).toEqual(
+        setLineEndings("export const myClass: string;\n")
+      );
       expect(console.log).toBeCalledWith(
         expect.stringContaining(`[SKIPPING] 'invalid-variable' contains dashes`)
       );
@@ -69,7 +79,9 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       });
 
       expect(definition).toEqual(
-        "export type Styles = {\n  'myClass': string;\n  'yourClass': string;\n};\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
+        setLineEndings(
+          "export type Styles = {\n  'myClass': string;\n  'yourClass': string;\n};\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
+        )
       );
     });
 
@@ -106,7 +118,9 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       });
 
       expect(definition).toEqual(
-        'export type Styles = {\n  "myClass": string;\n  "yourClass": string;\n};\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n'
+        setLineEndings(
+          'export type Styles = {\n  "myClass": string;\n  "yourClass": string;\n};\n\nexport type ClassNames = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n'
+        )
       );
     });
 
@@ -119,7 +133,9 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       });
 
       expect(definition).toEqual(
-        "export const myClass: string;\nexport const yourClass: string;\n"
+        setLineEndings(
+          "export const myClass: string;\nexport const yourClass: string;\n"
+        )
       );
     });
   });
@@ -134,7 +150,9 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       });
 
       expect(definition).toEqual(
-        "export type Styles = {\n  'myClass': string;\n  'yourClass': string;\n};\n\nexport type Classes = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
+        setLineEndings(
+          "export type Styles = {\n  'myClass': string;\n  'yourClass': string;\n};\n\nexport type Classes = keyof Styles;\n\ndeclare const styles: Styles;\n\nexport default styles;\n"
+        )
       );
     });
 
@@ -147,7 +165,9 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       });
 
       expect(definition).toEqual(
-        "export type IStyles = {\n  'myClass': string;\n  'yourClass': string;\n};\n\nexport type ClassNames = keyof IStyles;\n\ndeclare const styles: IStyles;\n\nexport default styles;\n"
+        setLineEndings(
+          "export type IStyles = {\n  'myClass': string;\n  'yourClass': string;\n};\n\nexport type ClassNames = keyof IStyles;\n\ndeclare const styles: IStyles;\n\nexport default styles;\n"
+        )
       );
     });
   });

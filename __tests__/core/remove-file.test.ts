@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 
 import { alerts } from "../../lib/core/alerts";
 import { removeSCSSTypeDefinitionFile } from "../../lib/core/remove-file";
@@ -8,8 +9,8 @@ jest.mock("fs");
 jest.mock("../../lib/core/alerts");
 
 describe("removeFile", () => {
-  const originalTestFile = `${__dirname}/../removable.scss`;
-  const existingFile = `${__dirname}/../style.scss`;
+  const originalTestFile = path.resolve(__dirname, "../removable.scss");
+  const existingFile = path.resolve(__dirname, "../style.scss");
   const existingTypes = getTypeDefinitionPath(originalTestFile);
 
   beforeEach(() => {
@@ -24,15 +25,13 @@ describe("removeFile", () => {
   it("does nothing if types file doesn't exist", async () => {
     const existsSyncSpy = fs.existsSync;
     const unlinkSyncSpy = fs.unlinkSync;
-    const nonExistingFile = `${__dirname}/../deleted.scss`;
+    const nonExistingFile = path.resolve(__dirname, "../deleted.scss");
     const nonExistingTypes = getTypeDefinitionPath(nonExistingFile);
     removeSCSSTypeDefinitionFile(nonExistingFile);
     expect(existsSyncSpy).toBeCalledWith(
-      expect.stringMatching(nonExistingFile)
+      expect.stringContaining(nonExistingFile)
     );
-    expect(existsSyncSpy).toBeCalledWith(
-      expect.stringMatching(nonExistingTypes)
-    );
+    expect(existsSyncSpy).toBeCalledWith(nonExistingTypes);
     expect(unlinkSyncSpy).not.toBeCalled();
     expect(alerts.success).not.toBeCalled();
   });
@@ -40,9 +39,9 @@ describe("removeFile", () => {
     const existsSyncSpy = fs.existsSync;
     const unlinkSyncSpy = fs.unlinkSync;
     removeSCSSTypeDefinitionFile(originalTestFile);
-    expect(existsSyncSpy).toBeCalledWith(expect.stringMatching(existingTypes));
+    expect(existsSyncSpy).toBeCalledWith(existingTypes);
     expect(unlinkSyncSpy).toBeCalled();
-    expect(unlinkSyncSpy).toBeCalledWith(expect.stringMatching(existingTypes));
+    expect(unlinkSyncSpy).toBeCalledWith(existingTypes);
     expect(alerts.success).toBeCalled();
   });
 });

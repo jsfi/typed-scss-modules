@@ -268,7 +268,7 @@ Print nothing
 
 - **Type**: `string`
 - **Default**: `undefined`
-- **Example**: `tsm src --banner '// This is an example banner\n'`
+- **Example**: `tsm src --banner "// This is an example banner\n"`
 
 Will prepend a string to the top of your output files
 
