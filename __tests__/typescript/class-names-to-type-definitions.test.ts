@@ -195,4 +195,38 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       expect(firstLine(definition!)).toBe(banner);
     });
   });
+
+  describe("EOL", () => {
+    it("uses unix line endings", async () => {
+      const definition = await classNamesToTypeDefinitions({
+        banner: "",
+        classNames: ["myClass", "yourClass"],
+        exportType: "named",
+        EOL: "\n",
+      });
+
+      expect(definition).toEqual(
+        setLineEndings(
+          "export const myClass: string;\nexport const yourClass: string;\n",
+          "\n"
+        )
+      );
+    });
+
+    it("uses windows line endings", async () => {
+      const definition = await classNamesToTypeDefinitions({
+        banner: "",
+        classNames: ["myClass", "yourClass"],
+        exportType: "named",
+        EOL: "\r\n",
+      });
+
+      expect(definition).toEqual(
+        setLineEndings(
+          "export const myClass: string;\nexport const yourClass: string;\n",
+          "\r\n"
+        )
+      );
+    });
+  });
 });

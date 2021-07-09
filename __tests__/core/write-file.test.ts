@@ -30,6 +30,7 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
+        EOL: "",
       });
 
       expect(fs.writeFileSync).toBeCalledWith(
@@ -58,6 +59,7 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
+        EOL: "",
       });
 
       expect(fs.writeFileSync).not.toBeCalled();
@@ -100,6 +102,7 @@ describeAllImplementations((implementation) => {
           quoteType: "single",
           updateStaleOnly: true,
           logLevel: "verbose",
+          EOL: "",
         });
 
         expect(fs.writeFileSync).not.toBeCalled();
@@ -123,6 +126,7 @@ describeAllImplementations((implementation) => {
           quoteType: "single",
           updateStaleOnly: true,
           logLevel: "verbose",
+          EOL: "",
         });
 
         expect(fs.writeFileSync).toBeCalled();
@@ -144,6 +148,7 @@ describeAllImplementations((implementation) => {
           quoteType: "single",
           updateStaleOnly: true,
           logLevel: "verbose",
+          EOL: "",
         });
 
         expect(fs.statSync).not.toBeCalled();

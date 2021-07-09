@@ -19,6 +19,7 @@ export interface TypeDefinitionOptions {
   exportTypeName?: string;
   exportTypeInterface?: string;
   quoteType?: QuoteType;
+  EOL?: string;
 }
 
 export const exportTypeDefault: ExportType = "named";
@@ -59,6 +60,7 @@ export const classNamesToTypeDefinitions = async (
   options: TypeDefinitionOptions
 ): Promise<string | null> => {
   if (options.classNames.length) {
+    const EOL = options.EOL || os.EOL;
     const lines: string[] = [];
 
     const {
@@ -76,10 +78,10 @@ export const classNamesToTypeDefinitions = async (
             classNameToType(className, options.quoteType || quoteTypeDefault)
           )
         );
-        lines.push(`};${os.EOL}`);
+        lines.push(`};${EOL}`);
 
-        lines.push(`export type ${ClassNames} = keyof ${Styles};${os.EOL}`);
-        lines.push(`declare const styles: ${Styles};${os.EOL}`);
+        lines.push(`export type ${ClassNames} = keyof ${Styles};${EOL}`);
+        lines.push(`declare const styles: ${Styles};${EOL}`);
         lines.push(`export default styles;`);
 
         break;
@@ -96,7 +98,7 @@ export const classNamesToTypeDefinitions = async (
     }
 
     if (lines.length) {
-      const typeDefinition = lines.join(`${os.EOL}`) + `${os.EOL}`;
+      const typeDefinition = lines.join(`${EOL}`) + `${EOL}`;
       return await attemptPrettier(typeDefinition);
     } else {
       return null;

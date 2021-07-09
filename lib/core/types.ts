@@ -13,4 +13,5 @@ export interface MainOptions extends Options {
   updateStaleOnly: boolean;
   watch: boolean;
   logLevel: LogLevel;
+  EOL: string;
 }

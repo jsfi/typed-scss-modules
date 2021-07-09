@@ -154,6 +154,12 @@ const { _: patterns, ...rest } = yargs
     default: bannerTypeDefault,
     describe:
       "Inserts text at the top of every output file for documentation purposes.",
+  })
+  .options("EOL", {
+    string: true,
+    default: "",
+    describe:
+      "EOL (end of line) for the generated d.ts files. Should be '\\n' or '\\r\\n' (default: os.EOL)",
   }).argv;
 
 main(patterns[0], { ...rest });

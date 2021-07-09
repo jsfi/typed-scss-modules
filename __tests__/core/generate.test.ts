@@ -27,6 +27,7 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
+        EOL: "",
       });
 
       expect(fs.writeFileSync).toBeCalledTimes(6);

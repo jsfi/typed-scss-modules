@@ -279,6 +279,14 @@ export type Styles = {
 };
 ```
 
+### `--EOL`
+
+- **Type**: `string`
+- **Default**: `os.EOL`
+- **Example**: `tsm src --EOL "\n"`
+
+EOL (end of line) for the generated d.ts files.
+
 ## Examples
 
 For examples, see the `examples` directory:

@@ -38,6 +38,7 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
+        EOL: "",
       });
 
       expect(exit).toHaveBeenCalledWith(1);
@@ -66,6 +67,7 @@ describeAllImplementations((implementation) => {
         updateStaleOnly: false,
         logLevel: "verbose",
         nameFormat: "kebab",
+        EOL: "",
       });
 
       expect(console.log).not.toHaveBeenCalled();
@@ -88,6 +90,7 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
+        EOL: "",
       });
 
       expect(exit).not.toHaveBeenCalled();

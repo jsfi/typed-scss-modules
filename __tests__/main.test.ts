@@ -29,6 +29,7 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
+        EOL: "",
       });
 
       expect(fs.writeFileSync).toBeCalledTimes(6);
@@ -61,6 +62,7 @@ describeAllImplementations((implementation) => {
         quoteType: "single",
         updateStaleOnly: false,
         logLevel: "verbose",
+        EOL: "",
       });
 
       expect(fs.writeFileSync).toBeCalledTimes(4);
